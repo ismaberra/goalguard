@@ -13,8 +13,11 @@ I) Dataset and Body joint coordinates Extraction
   After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
 
+
 For helping, here is an initial dataset containing 123 real-life videos of 25 frames each : https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset.
+And "Real_Dataset.zip" is the final version dataset that the model takes as input.
+
 
 
 II) Model 
