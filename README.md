@@ -74,7 +74,7 @@ For helping, here is an initial dataset containing 123 real-life videos of 25 fr
 
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset. And the final dataset is in "datasets".
 
-All the files are contained in the dataset Body Joint Extraction.
+All the files are contained in the directory Body_Joint_Extraction.
 
 
 # III) Model
