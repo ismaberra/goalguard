@@ -81,14 +81,14 @@ All the files are contained in the directory Body_Joint_Extraction.
 
 We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
 
-### Step 1: Pre-process Data**
+### Step 1: Pre-process Data
 
 To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing : train_data, val_data and test_data. Here the data has been quadrupled by first doing a vertical flipping, inversing the labels, and both at the same time, on the normalized coordinates :
 ```
 python preprocess.py
 ```
 
-### Step 2: Train the Model**
+### Step 2: Train the Model
 
 Run the train.py script to train the model. This script will execute the sttrans.py script, displaying validation and training loss in the terminal and as a graph. It also compares true results with predictions for the testing data and prints the model accuracy. The trained model is saved as best_model.pth.
 ```
