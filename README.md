@@ -65,10 +65,10 @@ The final step is to concatenate all the results from all the different videos a
 
 
 
-For helping, here is an initial dataset containing 123 real-life videos of 25 frames each : https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
+For helping, here is an initial dataset containing 123 real-life videos of 25 frames each : - https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
+
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset.
 And "Real_Dataset.zip" is the final version dataset that the model takes as input.
-
 
 
 **II) Model **
