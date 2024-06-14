@@ -7,7 +7,7 @@ The goal of this project is to predict the direction of a penalty kick solely ba
 
 ### A) Videos from real-life scenarios
 
-For the videos of real life scenarios, we manually selected one by one the penalties by downloading them from YouTube and then cutting them at the right length. This was done manually for all the videos. This dataset is composed of 123 penalties but after vertical flippling and x-translation, the dataset is tripled : **369 penalties**.
+For the videos of real life scenarios, we manually selected one by one the penalties by downloading them from YouTube and then cutting them at the right length. This was done manually for all the videos. This dataset is composed of 123 penalties but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 penalties**.
 
 ### B) Videos from FIFA
 
@@ -55,7 +55,7 @@ The final step is to concatenate all the results from all the different videos a
   python combine.py
 ```
 
-All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, the dataset is tripled : **4'155 penalties**.
+All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 penalties**.
 
 
 # II) Body joint coordinates Extraction
@@ -83,7 +83,7 @@ We will now look at the model and how to use it. Regarding the datasets that we 
 
 ### Step 1: Pre-process Data**
 
-To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing : train_data, val_data and test_data. Here the data has been tripled by first doing a vertical flipping and inversing the labels, as well as a x-translation on the normalized coordinates :
+To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing : train_data, val_data and test_data. Here the data has been quadrupled by first doing a vertical flipping, inversing the labels, and both at the same time, on the normalized coordinates :
 ```
 python preprocess.py
 ```
