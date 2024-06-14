@@ -4,6 +4,8 @@
 
 **A) Videos from real-life scenarios**
 
+For the videos of real life scenarios, we manually selected one by one the penalties by downloading them from YouTube and then cutting them at the right length. This was done manually for all the videos.
+
 **B) Videos from FIFA**
 
 First of all, we need to download the videos from YouTube. And here are two channels having a lot of penalty videos :
