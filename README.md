@@ -12,4 +12,5 @@ I) Dataset and Body joint coordinates Extraction
   
   After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
+
 II) Model 
