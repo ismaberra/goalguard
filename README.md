@@ -1,4 +1,4 @@
-**I) Dataset collection**
+## I) Dataset collection
 
   For the initial dataset, it is crucial to ensure that we have videos (ideally 30fps) that last exactly 1 second (to have exactly 30 frames per video) with the camera angle behind the shooter. However, if the videos do not have 30 frames (e.g., 25 frames), it is not an issue as long as they represent the 1 second before the shot because later, we can extend them to 30 frames. The goal is to collect high-quality videos from FIFA or real-life scenarios. It is essential that the video stops as late as possible before the kick to ensure we only process the run-up before the shot.
 
