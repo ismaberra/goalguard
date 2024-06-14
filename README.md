@@ -1,4 +1,4 @@
-The goal of this project is to predic the direction of a penalty kick solely based on the kicker's run-up.
+The goal of this project is to predict the direction of a penalty kick solely based on the kicker's run-up.
 
 
 # I) Dataset collection
