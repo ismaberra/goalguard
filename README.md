@@ -2,7 +2,7 @@
 
 This project aims to predict the direction of a penalty kick based on the player's run-up. We use a combination of video data from FIFA video games and real-life footage to develop and train a pose estimation model that can accurately analyze the player's movements and predict the kick's direction.
 
-
+This project is also an "extension" of 
 
 ## I) Dataset collection
 
