@@ -85,7 +85,7 @@ All the files are contained in the dataset FIFA folder and it goes without menti
 For example, for an input folder containing 10 videos of 30 frames each, we will have an output folder with 10 folders, each containing 30 CSV files with 12 rows and 3 columns ('x': x position, 'y': y position, 'z': certainty score).
 
 We initially tested several pose estimation models, but they did not perform well at all. Just before the midterm, we opted to use YOLOv7 (https://github.com/WongKinYiu/yolov7) for pose estimation, but the results were not very convincing and were quite approximate. After the midterm, we switched to YOLOv8 from Ultralytics (https://github.com/ultralytics/ultralytics), which is the latest version of YOLO capable of pose estimation and offers several models :
-<img width="600" alt="Capture d’écran 2024-06-16 à 20 41 04" src="https://github.com/vita-epfl/goalguard/assets/83677158/89ddd51c-b484-4c2c-b838-a47d9bb89591">
+<img width="650" alt="Capture d’écran 2024-06-16 à 20 41 04" src="https://github.com/vita-epfl/goalguard/assets/83677158/89ddd51c-b484-4c2c-b838-a47d9bb89591">
 
 For the FIFA videos, we used the YOLOv8s-pose model because its performance was sufficient for these videos (which are of very high quality and very clear), and with more than 1300 videos to process, the processing time of this model was suitable (it takes more than 2.5 hours to process over 1300 videos with a CPU).
 
