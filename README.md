@@ -98,7 +98,7 @@ https://github.com/vita-epfl/goalguard/assets/83677158/0fdaa3ba-9b09-4694-9bb6-0
 
 Once the body joints are extracted, we need to use "CSV_zeros.ipynb" to handle zeros. Occasionally, the model used for pose estimation does not detect certain body parts that may be obscured, setting 'x' and 'y' to 0.0 but not the certainty score (which is just very low). The "CSV_zeros.ipynb" script addresses this issue by setting the certainty scores of keypoints positioned at [0.0, 0.0] to zero. We applied this algorithm to all the CSV files.
 
-Here is an example of a zero, the row concerns the left hand that is obsured by the body of the player :
+Here is an example of a zero, the row concerns the left hand that is hidden by the body of the player :
 
 <img width="300" alt="Capture d’écran 2024-06-16 à 20 44 27" src="https://github.com/vita-epfl/goalguard/assets/83677158/34bfb08a-d693-4993-ba0b-d7a18311f8c1">
 <img width="461" alt="Capture d’écran 2024-06-16 à 20 53 52" src="https://github.com/vita-epfl/goalguard/assets/83677158/10afdfc0-62e6-4c6f-9801-f38454b61c7e">
