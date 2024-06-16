@@ -93,6 +93,7 @@ For the FIFA videos, we used the YOLOv8s-pose model because its performance was 
 For the real-life videos, we used the most complex model since the videos were of lower quality and there were only 123 of them, so we could afford to use a more complex model (which takes approximately 1.5 hours with a CPU).
 
 Here is an example of the pose-estimation on a real video :
+
 https://github.com/vita-epfl/goalguard/assets/83677158/0fdaa3ba-9b09-4694-9bb6-016685af3419
 
 Once the body joints are extracted, we need to use "CSV_zeros.ipynb" to handle zeros. Occasionally, the model used for pose estimation does not detect certain body parts that may be obscured, setting 'x' and 'y' to 0.0 but not the certainty score (which is just very low). The "CSV_zeros.ipynb" script addresses this issue by setting the certainty scores of keypoints positioned at [0.0, 0.0] to zero. We applied this algorithm to all the CSV files.
