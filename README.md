@@ -103,7 +103,7 @@ Here is an example of a zero, the row concerns the left hand that is hidden by t
 <img width="300" alt="Capture d’écran 2024-06-16 à 20 44 27" src="https://github.com/vita-epfl/goalguard/assets/83677158/34bfb08a-d693-4993-ba0b-d7a18311f8c1">
 <img width="461" alt="Capture d’écran 2024-06-16 à 20 53 52" src="https://github.com/vita-epfl/goalguard/assets/83677158/10afdfc0-62e6-4c6f-9801-f38454b61c7e">
 
-Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files. We applied this algorithm specifically to the real-life videos.
+Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files. We applied this algorithm to the real-life videos.
 
 After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
