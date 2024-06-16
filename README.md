@@ -88,9 +88,9 @@ We initially tested several pose estimation models, but they did not perform wel
 
 <img width="700" alt="Capture d’écran 2024-06-16 à 20 41 04" src="https://github.com/vita-epfl/goalguard/assets/83677158/89ddd51c-b484-4c2c-b838-a47d9bb89591">
 
-For the FIFA videos, we used the YOLOv8s-pose model because its performance was sufficient for these videos (which are of very high quality and very clear), and with more than 1300 videos to process, the processing time of this model was suitable (it takes more than 2.5 hours to process over 1300 videos with a CPU).
+For the FIFA videos, we used the YOLOv8s-pose model because its performance was sufficient for these videos (which are of very high quality and very clear), and with more than 1300 videos to process, the processing time of this model was suitable (it takes more than 2.5 hours to process over 1300 videos with CPU).
 
-For the real-life videos, we used the most complex model since the videos were of lower quality and there were only 123 of them, so we could afford to use a more complex model (which takes approximately 1.5 hours with a CPU).
+For the real-life videos, we used the most complex model since the videos were of lower quality and there were only 123 of them, so we could afford to use a more complex model (which takes approximately 1.5 hours with CPU).
 
 Here is an example of the pose-estimation on a real video :
 
