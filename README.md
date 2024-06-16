@@ -14,13 +14,12 @@ For the videos of real life scenarios, we manually selected one by one the penal
 
 ### B) Videos from FIFA
 
-First of all, we need to download the videos from YouTube. And here are two channels having a lot of penalty videos :
+First, we need to download the videos from YouTube. Here are two channels with many penalty videos:
+
 - https://www.youtube.com/@fifagrg
 - https://www.youtube.com/@ALLGOAL
 
-Now that the videos are downloaded from YouTube under high quality, we need to detect each penalty and create two videos out of each penalty. One video representing the kicker right before the contact of the ball. This video is 1s long and constituted of 30 frames. As well as one video of 0.7s that will be representing the result of the penalty where we will apply some pose estimation on the ball to obtain the true penalty result.
-
-
+After downloading the videos in high quality, we detect each penalty and create two videos from each penalty: one representing the kicker right before the contact with the ball (1s long, 30 frames) and another representing the result of the penalty (0.7s long).
 
 All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 penalties**.
 
