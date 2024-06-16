@@ -6,7 +6,9 @@ This project aims to predict the direction of a penalty kick based on the player
 
 ## I) Dataset collection
 
-  For the initial dataset, it is crucial to ensure that we have videos (ideally 30fps) that last exactly 1 second (to have exactly 30 frames per video) with the camera angle behind the shooter. However, if the videos do not have 30 frames (e.g., 25 frames), it is not an issue as long as they represent the 1 second before the shot because later, we can extend them to 30 frames. The goal is to collect high-quality videos from FIFA or real-life scenarios. It is essential that the video stops as late as possible before the kick to ensure we only process the run-up before the shot.
+  For the initial dataset, it is crucial to ensure that we have videos (ideally 30fps) that last exactly 1 second (to have exactly 30 frames per video) with the camera angle behind the shooter. We chose videos at 30fps to facilitate the search for real-life videos on the internet, as this is a common frame rate for high-quality recordings. However, if the videos do not have 30 frames (e.g., 25 frames), it is not an issue as long as they represent the 1 second before the shot because later, we can extend them to 30 frames.
+
+The goal is to collect high-quality videos from FIFA or real-life scenarios. We selected 1 second before the shot because we estimated that this duration is sufficient to capture the run-up without being excessively long, which could be inconsistent. Additionally, we chose the camera angle from behind the shooter as it is the most representative of the run-up and would facilitate the collection of FIFA videos. It is essential that the video stops as late as possible before the kick to ensure we only process the run-up before the shot.
 
 ### A) Videos from real-life scenarios
 
