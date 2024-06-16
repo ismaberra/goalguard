@@ -120,8 +120,6 @@ Here is a visualization of the player's race after using the interpolation algor
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 
-All the files are contained in the directory Body_Joint_Extraction.
-
 ## III) Model
 
 We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
