@@ -14,6 +14,7 @@ The goal is to collect high-quality videos from FIFA or real-life scenarios. We 
 
 For the videos of real-life scenarios, we manually selected each penalty by downloading them from YouTube and then cutting them to the right length. This was done manually for all the videos. This dataset is composed of 123 penalties. Collecting these videos was very challenging because football organizations such as UEFA, FIFA, etc., are very strict about access to match footage on the internet. To access these matches, one would typically need to pay for subscriptions to get special access to match videos. Additionally, the camera angle from behind the shooter has only been available for a few years, thanks to technologies like drone usage for filming sequences.
 
+
 The penalties collected are from the few replays available on the official YouTube channels of these organizations. We downloaded the videos in 25fps since these channels only broadcasted them at that frame rate. Then, we manually cut the videos using iMovie because the video quality was not good enough to ensure that an automated model could perform this task accurately. 
 
 Here is the initial dataset containing 123 real-life videos of 25 frames each :
@@ -47,6 +48,10 @@ For the FIFA videos, we used the YOLOv8s-pose model because its performance was 
 For the real-life videos, we used the most complex model since the videos were of lower quality and there were only 123 of them, so we could afford to use a more complex model (which takes approximately 1.5 hours with a CPU).
 
 Once the body joints are extracted, we need to use "CSV_zeros.ipynb" to handle zeros. Occasionally, the model used for pose estimation does not detect certain body parts that may be obscured, setting 'x' and 'y' to 0.0 but not the certainty score (which is just very low). The "CSV_zeros.ipynb" script addresses this issue by setting the certainty scores of keypoints positioned at [0.0, 0.0] to zero. We applied this algorithm to all the CSV files.
+
+Here is an example of a zero, the row concerns the left hand that is obsured by the body of the player :
+<img width="357" alt="Capture d’écran 2024-06-16 à 20 44 27" src="https://github.com/vita-epfl/goalguard/assets/83677158/34bfb08a-d693-4993-ba0b-d7a18311f8c1">
+<img width="561" alt="Capture d’écran 2024-06-16 à 20 53 52" src="https://github.com/vita-epfl/goalguard/assets/83677158/10afdfc0-62e6-4c6f-9801-f38454b61c7e">
 
 Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files. We applied this algorithm specifically to the real-life videos.
 
