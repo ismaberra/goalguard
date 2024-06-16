@@ -120,6 +120,9 @@ Here is a visualization of the player's race after using the interpolation algor
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 
+Our final datasets are in the folder Datasets, the real dataset is composed of 123 samples but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 samples**. And the FIFA game dataset is composed of **1'385 samples**  but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 penalties**.
+So our final dataset is composed of **6032 samples**.
+
 ## III) Model
 
 We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
