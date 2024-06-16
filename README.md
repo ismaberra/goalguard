@@ -35,15 +35,22 @@ All the files are contained in the dataset FIFA folder and it goes without menti
 
 ## II) Body joint coordinates Extraction
   
-  Once we have all our videos in a folder, we need to apply "Pose_estimation.ipynb" by modifying the code to point to the folder containing the videos and an output folder. The code will process all videos in the folder one by one and create, in the output folder, a new folder for each video containing CSV files for each frame. Each CSV file will describe the positions of the keypoints [left shoulder, right shoulder, left elbow, right elbow, left wrist, right wrist, left hip, right hip, left knee, right knee, left ankle, right ankle] in this order, along with their certainty scores.
-  
-  For example, for an input folder containing 10 videos of 30 frames each, we will have an output folder with 10 folders, each containing 30 CSV files with 12 rows and 3 columns ('x': x position, 'y': y position, 'z': certainty score).
-  
-  Once the body joints are extracted, we need to use "CSV_zeros.ipynb" to handle zeros. Occasionally, the model used for pose estimation does not detect certain body parts that may be obscured, setting 'x' and 'y' to 0.0 but not the certainty score (which is just very low). The "CSV_zeros.ipynb" script addresses this issue by setting the certainty scores of keypoints positioned at [0.0, 0.0] to zero.
-  
-  Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files.
-  
-  After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
+  Once we have all our videos in a folder, we need to apply "Pose_estimation.ipynb" by modifying the code to point to the folder containing the videos and an output folder. The code will process all videos in the folder one by one and create, in the output folder, a new folder for each video containing CSV files for each frame. Each CSV file will describe the positions of the keypoints [left shoulder, right shoulder, left elbow, right elbow, left wrist, right wrist, left hip, right hip, left knee, right knee, left ankle, right ankle] in this order, along with their certainty scores (we did not take the head into account because the model does not detect the back of the head (only the nose, eyes and ears) and in any case we thought that it was not necessarily relevant for the penalty kick direction estimation).
+
+For example, for an input folder containing 10 videos of 30 frames each, we will have an output folder with 10 folders, each containing 30 CSV files with 12 rows and 3 columns ('x': x position, 'y': y position, 'z': certainty score).
+
+We initially tested several pose estimation models, but they did not perform well at all. Just before the midterm, we opted to use YOLOv7 (https://github.com/WongKinYiu/yolov7) for pose estimation, but the results were not very convincing and were quite approximate. After the midterm, we switched to YOLOv8 from Ultralytics (https://github.com/ultralytics/ultralytics), which is the latest version of YOLO capable of pose estimation and offers several models :
+<img width="794" alt="Capture d’écran 2024-06-16 à 20 41 04" src="https://github.com/vita-epfl/goalguard/assets/83677158/89ddd51c-b484-4c2c-b838-a47d9bb89591">
+
+For the FIFA videos, we used the YOLOv8s-pose model because its performance was sufficient for these videos (which are of very high quality and very clear), and with more than 1300 videos to process, the processing time of this model was suitable (it takes more than 2.5 hours to process over 1300 videos with a CPU).
+
+For the real-life videos, we used the most complex model since the videos were of lower quality and there were only 123 of them, so we could afford to use a more complex model (which takes approximately 1.5 hours with a CPU).
+
+Once the body joints are extracted, we need to use "CSV_zeros.ipynb" to handle zeros. Occasionally, the model used for pose estimation does not detect certain body parts that may be obscured, setting 'x' and 'y' to 0.0 but not the certainty score (which is just very low). The "CSV_zeros.ipynb" script addresses this issue by setting the certainty scores of keypoints positioned at [0.0, 0.0] to zero. We applied this algorithm to all the CSV files.
+
+Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files. We applied this algorithm specifically to the real-life videos.
+
+After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
 
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset. And the final dataset is in "datasets".
