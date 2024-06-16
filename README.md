@@ -20,8 +20,6 @@ The penalties collected are from the few replays available on the official YouTu
 Here is the initial dataset containing 123 real-life videos of 25 frames each :
 - https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
 
-This dataset is composed of 123 penalties but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 penalties**.
-
 ## B) Videos from FIFA
 
 
@@ -75,7 +73,7 @@ The final step is to concatenate all the results from all the different videos a
 ```
   python combine.py
 ```
-All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : 5'540 penalties.
+All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel).
 
 
 ## II) Body joint coordinates Extraction
