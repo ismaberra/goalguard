@@ -16,6 +16,9 @@ For the videos of real-life scenarios, we manually selected each penalty by down
 
 The penalties collected are from the few replays available on the official YouTube channels of these organizations. We downloaded the videos in 25fps since these channels only broadcasted them at that frame rate. Then, we manually cut the videos using iMovie because the video quality was not good enough to ensure that an automated model could perform this task accurately. 
 
+Here is the initial dataset containing 123 real-life videos of 25 frames each :
+- https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
+
 This dataset is composed of 123 penalties but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 penalties**.
 
 ### B) Videos from FIFA
@@ -42,7 +45,6 @@ All the files are contained in the dataset FIFA folder and it goes without menti
   
   After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
-For helping, here is an initial dataset containing 123 real-life videos of 25 frames each : - https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
 
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset. And the final dataset is in "datasets".
 
