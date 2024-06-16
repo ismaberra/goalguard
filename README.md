@@ -12,7 +12,11 @@ The goal is to collect high-quality videos from FIFA or real-life scenarios. We 
 
 ### A) Videos from real-life scenarios
 
-For the videos of real life scenarios, we manually selected one by one the penalties by downloading them from YouTube and then cutting them at the right length. This was done manually for all the videos. This dataset is composed of 123 penalties but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 penalties**.
+For the videos of real-life scenarios, we manually selected each penalty by downloading them from YouTube and then cutting them to the right length. This was done manually for all the videos. This dataset is composed of 123 penalties. Collecting these videos was very challenging because football organizations such as UEFA, FIFA, etc., are very strict about access to match footage on the internet. To access these matches, one would typically need to pay for subscriptions to get special access to match videos. Additionally, the camera angle from behind the shooter has only been available for a few years, thanks to technologies like drone usage for filming sequences.
+
+The penalties collected are from the few replays available on the official YouTube channels of these organizations. We downloaded the videos in 25fps since these channels only broadcasted them at that frame rate. Then, we manually cut the videos using iMovie because the video quality was not good enough to ensure that an automated model could perform this task accurately. 
+
+This dataset is composed of 123 penalties but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 penalties**.
 
 ### B) Videos from FIFA
 
