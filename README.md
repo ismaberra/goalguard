@@ -106,7 +106,11 @@ After completing all these steps, the final dataset will be ready for model proc
 Here is a visualization of the player's race before using the interpolation algorithm and after :
 
 
-https://github.com/vita-epfl/goalguard/assets/83677158/72663a65-40a0-4918-9f36-f5247b3b5977
+
+https://github.com/vita-epfl/goalguard/assets/83677158/0fdaa3ba-9b09-4694-9bb6-016685af3419
+
+
+
 
 
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
