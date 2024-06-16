@@ -2,7 +2,9 @@
 
 This project aims to predict the direction of a penalty kick based on the player's run-up. We use a combination of video data from FIFA video games and real-life footage to develop and train a pose estimation model that can accurately analyze the player's movements and predict the kick's direction.
 
-# I) Dataset collection
+# Usage
+
+## I) Dataset collection
 
   For the initial dataset, it is crucial to ensure that we have videos (ideally 30fps) that last exactly 1 second (to have exactly 30 frames per video) with the camera angle behind the shooter. However, if the videos do not have 30 frames (e.g., 25 frames), it is not an issue as long as they represent the 1 second before the shot because later, we can extend them to 30 frames. The goal is to collect high-quality videos from FIFA or real-life scenarios. It is essential that the video stops as late as possible before the kick to ensure we only process the run-up before the shot.
 
@@ -59,7 +61,7 @@ The final step is to concatenate all the results from all the different videos a
 All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 penalties**.
 
 
-# II) Body joint coordinates Extraction
+## II) Body joint coordinates Extraction
   
   Once we have all our videos in a folder, we need to apply "Pose_estimation.ipynb" by modifying the code to point to the folder containing the videos and an output folder. The code will process all videos in the folder one by one and create, in the output folder, a new folder for each video containing CSV files for each frame. Each CSV file will describe the positions of the keypoints [left shoulder, right shoulder, left elbow, right elbow, left wrist, right wrist, left hip, right hip, left knee, right knee, left ankle, right ankle] in this order, along with their certainty scores.
   
@@ -78,7 +80,7 @@ The file "penalty_16.avi" is a visualization of the Body joint extraction of the
 All the files are contained in the directory Body_Joint_Extraction.
 
 
-# III) Model
+## III) Model
 
 We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
 
@@ -95,4 +97,5 @@ Run the train.py script to train the model. This script will execute the sttrans
 ```
 python training.py
 ```
+
 
