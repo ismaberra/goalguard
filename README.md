@@ -57,6 +57,9 @@ Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use 
 
 After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
 
+Here is a visualization of the player's race before using the interpolation algorithm and after :
+
+https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset. And the final dataset is in "datasets".
 
