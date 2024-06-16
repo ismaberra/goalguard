@@ -2,7 +2,7 @@
 
 This project aims to predict the direction of a penalty kick based on the player's run-up. We use a combination of video data from FIFA video games and real-life footage to develop and train a pose estimation model that can accurately analyze the player's movements and predict the kick's direction.
 
-# Usage
+
 
 ## I) Dataset collection
 
@@ -20,43 +20,7 @@ First of all, we need to download the videos from YouTube. And here are two chan
 
 Now that the videos are downloaded from YouTube under high quality, we need to detect each penalty and create two videos out of each penalty. One video representing the kicker right before the contact of the ball. This video is 1s long and constituted of 30 frames. As well as one video of 0.7s that will be representing the result of the penalty where we will apply some pose estimation on the ball to obtain the true penalty result.
 
-### Step 1: Detect Frames
 
-First, run the detect.py script to identify the frames where the kicker touches the ball. This script requires the weights for the detection model and the video file to be processed. Here, for the example, we will process the first video that is called shoot-1, and we will use the heaviest model found on YOLOv9 :
-   ```
-   python detect.py --weights yolov9-e.pt --conf 0.2 --source shoot-1.mp4
-```
-  
-This will output a CSV file named detected_frames_1.csv, which contains the frame numbers where the kicker is in contact with the ball for the video 1.
-  
-### Step 2: Cut Videos
-
-Next, run the video_cut.py script to generate short video clips around the moment of ball contact. This script takes the detected_frames_1.csv file as input and produces video clips for each penalty. More specifically, it will output the folder Videos_CUT_1, where all the videos before ball contact will be stored, and a folder called Videos_RESULT_1, where all the clips containing the result of the penalty will be stored :
-```
-  python videocut.py --source shoot-1.mp4
-```
-The videos found in the Videos_CUT_1 folder will be directly used for the body joints coordinate extraction, while the ones found in the Videos_RESULT_1 folder needs to be processed a bit further.
-
-### Step 3: Run Pose Estimation on the ball
-
-Use the run_detection.py script to execute the detection.py and to apply pose estimation on the ball in order to determine the outcome of each penalty. This script requires the confidence threshold for detection and the folder containing the video clips :
-```
-  python run_detection.py --conf 0.6 --source-folder Videos_RESULT_1
-```
-This will output the folder Detection_RESULT_1, where inside, for each video a ball_tracking.csv file is containing the estimated position of the ball for each frame, as well as a video clip with the visualization of the estimated ball position thanks to a Kalman Filter. 
-
-### Step 4: Obtain all the results from one video
-
-Finally, run the results.py file script to combine all the results of the penalties from one video. And this will output the results_1.csv file where all the penalties results will be stored :
-```
-  python results.py --source-folder Detection_RESULT_1
-```
-### Step 5: Concatenate Results
-
-The final step is to concatenate all the results from all the different videos and this is done by running the script combine.py that will concatenate all the penalties in the right order following the number of each folder :
-```
-  python combine.py
-```
 
 All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel) but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 penalties**.
 
@@ -78,6 +42,61 @@ For helping, here is an initial dataset containing 123 real-life videos of 25 fr
 The file "penalty_16.avi" is a visualization of the Body joint extraction of the video "penalty_16" of this dataset. And the final dataset is in "datasets".
 
 All the files are contained in the directory Body_Joint_Extraction.
+
+# Usage
+
+### Step 1: Detect Frames
+
+Run the detect.py script to identify the frames where the kicker touches the ball. This script requires the weights for the detection model and the video file to be processed.
+   ```
+   python detect.py --weights yolov9-e.pt --conf 0.2 --source shoot-1.mp4
+```
+  
+This will output a CSV file named detected_frames_1.csv, containing the frame numbers where the kicker contacts the ball for video 1.
+
+### Step 2: Cut Videos
+
+Run the video_cut.py script to generate short video clips around the moment of ball contact.
+
+```
+  python videocut.py --source shoot-1.mp4
+```
+This will create two folders: Videos_CUT_1 (videos before ball contact) and Videos_RESULT_1 (videos with the penalty result).
+
+
+### Step 3: Run Pose Estimation on the ball
+
+Use the run_detection.py script to apply pose estimation on the ball and determine the outcome of each penalty.
+
+```
+  python run_detection.py --conf 0.6 --source-folder Videos_RESULT_1
+```
+This will output a folder Detection_RESULT_1, containing ball_tracking.csv files with the estimated ball positions and video clips with visualizations of the estimated positions.
+
+### Step 4: Obtain all the results from one video
+
+Run the results.py script to combine all the results of the penalties from one video.
+
+```
+  python results.py --source-folder Detection_RESULT_1
+```
+This will produce a results_1.csv file with all the penalty results.
+
+### Step 5: Concatenate Results
+
+Run the combine.py script to concatenate all the results from the different videos.
+
+```
+  python combine.py
+```
+Ensure all paths in each file are adjusted to the specific path of the video files. The FIFA dataset is composed of 1,385 penalties (from 25 YouTube videos), and after augmentation, it is quadrupled to 5,540 penalties.
+
+### Body Joint Coordinates Extraction
+1. Apply "Pose_estimation.ipynb" to the videos folder, specifying input and output folders.
+2. Use "CSV_zeros.ipynb" to handle zeros in the data.
+3. If necessary, run "25_to_30_fps.ipynb" to convert 25fps videos to 30fps.
+
+### Model
 
 
 ## III) Model
