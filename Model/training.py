@@ -89,8 +89,6 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
 
     if test_loader:
         true_labels, pred_labels = evaluate_model(model, test_loader)
-        accuracy = sum(np.array(true_labels) == np.array(pred_labels)) / len(true_labels)
-        print(f'Testing Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})')
 
     plt.figure()
     plt.plot(training_losses, label='Training Loss')
@@ -181,7 +179,7 @@ def main():
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3)
 
-    train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=2, test_loader=test_loader)
+    train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3, test_loader=test_loader)
 
     model.load_state_dict(torch.load('best_model.pth'))
     true_labels, pred_labels = evaluate_model(model, test_loader)
