@@ -119,7 +119,7 @@ Here is a visualization of the player's race after using the interpolation algor
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 
-Our final datasets are in the folder Datasets, the real dataset is composed of 123 samples but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 samples**. And the FIFA game dataset is composed of 1'385 samples  but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 samples**.
+Our final datasets are in the folder Datasets, the real dataset is composed of 123 samples but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 samples**. And the FIFA game dataset is composed of 1'385 samples  but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **5'540 samples**.
 So our final dataset is composed of **6032 samples**.
 
 # III) Model
@@ -140,15 +140,51 @@ Run the train.py script to train the model. This script will execute the sttrans
 python training.py
 ```
 
-The training process uses Optuna Tuning to optimize the hyperparameters. The best hyperparameters found were:
+We also tuned the hyperparamaters using Optuna over 50 trials, to optimize the model. The best hyperparameters found were:
 
-| Hyperparameter       | Value                  |
-|----------------------|------------------------|
-| Batch size           | 52                     |
-| Dropout              | 0.38415372018572036    |
-| Learning rate        | 0.00018305748553194186 |
-| Weight decay         | 0.005783491595599079   |
-| Number of layers     | 4                      |
-| Number of heads      | 4                      |
-| Feedforward dim      | 768                    |
+| Hyperparameter             | Value                  |
+|----------------------------|------------------------|
+| Batch size                 | 52                     |
+| Dropout                    | 0.38415372018572036    |
+| Learning rate              | 0.00018305748553194186 |
+| Weight decay               | 0.005783491595599079   |
+| Number of layers           | 4                      |
+| Number of heads            | 4                      |
+| Feedforward dimension      | 768                    |
+
+
+The resulting graph showing training and validation loss includes the accuracy during testing, which was achieved to be significantly better than random guess (25%). The final accuracy achieved was higher than 35%, indicating a 10% improvement over a random guess.
+
+![Training and Validation Loss](Training_Validation_Loss.png)
+
+### Step 3: Inference
+
+To run inference using the trained model, use the inference.py script. This script loads the trained model and processes a given penalty video to predict the penalty direction. It prints the predicted and true labels, as well as a video of said penalty with a mark visualizing the predicted zone.
+```
+python inference.py penalty_X
+```
+
+### Example Predictions
+
+#### Correct Prediction
+- Penalty: 5
+- [Prediction Video - Correct](path_to_correct_prediction_video/penalty_5.mp4)
+
+#### Incorrect Prediction
+- Penalty: 218
+- [Prediction Video - Incorrect](path_to_incorrect_prediction_video/penalty_218.mp4)
+
+
+### Data Augmentation
+
+To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize.
+
+### Limitations and Future Work
+
+The model's performance is constrained by the limited size and imbalance of the dataset. Potential improvements could include:
+- Dimensionality reduction techniques
+- 3D pose estimation instead of 2D
+- Integration of additional features like whether the player is right-footed or left-footed
+
+By addressing these limitations, we can further enhance the model's accuracy and robustness.
 
