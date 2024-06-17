@@ -49,7 +49,14 @@ Next, run the video_cut.py script to generate short video clips around the momen
   python videocut.py --source shoot-1.mp4
 ```
 
+Before ball contact :
+
 https://github.com/vita-epfl/goalguard/assets/146441738/f11963e2-1ee7-428c-9084-1d9590da6800
+
+
+After ball contact:
+
+https://github.com/vita-epfl/goalguard/assets/146441738/fbec4334-16f6-4428-99b4-ec91c0431c69
 
 
 The videos found in the Videos_CUT_1 folder will be directly used for the body joints coordinate extraction, while the ones found in the Videos_RESULT_1 folder needs to be processed a bit further.
@@ -176,12 +183,12 @@ python inference.py penalty_X
 ### Example Predictions
 
 #### Correct Prediction
-- Penalty: 5
+Penalty: 5
 
 https://github.com/vita-epfl/goalguard/assets/146441738/de9d479f-7859-4b16-93af-c4331b20a170
 
 #### Incorrect Prediction
-- Penalty: 218
+Penalty: 218
 
 https://github.com/vita-epfl/goalguard/assets/146441738/2739f9f5-aaa4-440e-aba3-9e73e37abd10
 
