@@ -108,14 +108,6 @@ After completing all these steps, the final dataset will be ready for model proc
 
 Here is a visualization of the player's race after using the interpolation algorithm:
 
-
-
-
-
-
-
-
-
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 
@@ -137,10 +129,10 @@ python preprocess.py
 
 The model is based on a transformer architecture, which is known for its effectiveness in handling sequential data. Our model comprises the following components:
 - **Transformer Encoder Layers**: The model consists of 4 transformer encoder layers. Each layer has 4 attention heads, which allow the model to focus on different parts of the input sequence simultaneously.
-- **Residual Blocks**: Each encoder layer includes residual connections to help gradients flow through the network, which eases the training of deeper models.
-- **Feedforward Network**: After the multi-head attention mechanism, each layer has a feedforward neural network with a dimensionality of 768.
+- **Residual Blocks**: Each encoder layer includes residual connections to help gradients flow through the network.
+- **Feedforward Network**: Each layer has a feedforward neural network with a dimensionality of 768.
 - **Convolutional Layers**: The input sequences are initially processed with convolutional layers to extract higher-level features before feeding them into the transformer encoder.
-- **Dropout**: A dropout rate of 0.38415372018572036 is used to prevent overfitting.
+- **Dropout**: A dropout rate of 0.38415372018572036 (found with Optuna) is used to prevent as possible the overfitting.
 
 The goal of this architecture is to leverage the self-attention mechanism of transformers to capture the dependencies between different frames in the penalty kick sequence. 
 Furthermore, to optimize the model, we tuned the hyperparamaters using Optuna over 50 trials. The best hyperparameters found were:
