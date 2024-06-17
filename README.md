@@ -5,7 +5,7 @@ This project aims to predict the direction of a penalty kick based on the player
 
 It is an "extension" of this project : [Penalty_Kick_Analysis.pdf](https://github.com/user-attachments/files/15859660/Penalty_Kick_Analysis.pdf)
 
-## I) Dataset collection
+# I) Dataset collection
 
   For the initial dataset, it is crucial to ensure that we have videos (ideally 30fps) that last exactly 1 second (to have exactly 30 frames per video) with the camera angle behind the shooter. We choose videos at 30fps to facilitate the search for real-life videos on the internet, as this is a common frame rate for high-quality recordings. However, if the videos do not have 30 frames (e.g., 25 frames), it is not an issue as long as they represent the 1 second before the shot because later, we can extend them to 30 frames.
 
@@ -21,7 +21,7 @@ The penalties collected are from the few replays available on the official YouTu
 Here is the initial dataset containing 123 real-life videos of 25 frames each :
 - https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
 
-## B) Videos from FIFA
+### B) Videos from FIFA
 
 
 First of all, we need to download the videos from YouTube. And here are two channels having a lot of penalty videos :
@@ -31,7 +31,7 @@ First of all, we need to download the videos from YouTube. And here are two chan
 
 Now that the videos are downloaded from YouTube under high quality, we need to detect each penalty and create two videos out of each penalty. One video representing the kicker right before the contact of the ball. This video is 1s long and constituted of 30 frames. As well as one video of 0.7s that will be representing the result of the penalty where we will apply some pose estimation on the ball to obtain the true penalty result.
 
-### Step 1: Detect Frames
+#### Step 1: Detect Frames
 
 First, run the detect.py script to identify the frames where the kicker touches the ball. This script requires the weights for the detection model and the video file to be processed. Here, for the example, we will process the first video that is called shoot-1, and we will use the heaviest model found on YOLOv9 :
 
@@ -41,7 +41,7 @@ First, run the detect.py script to identify the frames where the kicker touches 
 
 This will output a CSV file named detected_frames_1.csv, which contains the frame numbers where the kicker is in contact with the ball for the video 1.
 
-### Step 2: Cut Videos
+#### Step 2: Cut Videos
 
 Next, run the video_cut.py script to generate short video clips around the moment of ball contact. This script takes the detected_frames_1.csv file as input and produces video clips for each penalty. More specifically, it will output the folder Videos_CUT_1, where all the videos before ball contact will be stored, and a folder called Videos_RESULT_1, where all the clips containing the result of the penalty will be stored :
 
@@ -50,7 +50,7 @@ Next, run the video_cut.py script to generate short video clips around the momen
 ```
 The videos found in the Videos_CUT_1 folder will be directly used for the body joints coordinate extraction, while the ones found in the Videos_RESULT_1 folder needs to be processed a bit further.
 
-### Step 3: Run Pose Estimation on the ball
+#### Step 3: Run Pose Estimation on the ball
 
 Use the run_detection.py script to execute the detection.py and to apply pose estimation on the ball in order to determine the outcome of each penalty. This script requires the confidence threshold for detection and the folder containing the video clips :
 
@@ -59,7 +59,7 @@ Use the run_detection.py script to execute the detection.py and to apply pose es
 ```
 This will output the folder Detection_RESULT_1, where inside, for each video a ball_tracking.csv file is containing the estimated position of the ball for each frame, as well as a video clip with the visualization of the estimated ball position thanks to a Kalman Filter.
 
-### Step 4: Obtain all the results from one video
+#### Step 4: Obtain all the results from one video
 
 Finally, run the results.py file script to combine all the results of the penalties from one video. And this will output the results_1.csv file where all the penalties results will be stored :
 
@@ -67,7 +67,7 @@ Finally, run the results.py file script to combine all the results of the penalt
 ```
   python results.py --source-folder Detection_RESULT_1
 ```
-### Step 5: Concatenate Results
+#### Step 5: Concatenate Results
 
 The final step is to concatenate all the results from all the different videos and this is done by running the script combine.py that will concatenate all the penalties in the right order following the number of each folder :
 
@@ -77,7 +77,7 @@ The final step is to concatenate all the results from all the different videos a
 All the files are contained in the dataset FIFA folder and it goes without mention that the paths in each file needs to be adjusted to the specific path of the video files. This dataset is composed of 1'385 penalties (25 youtube videos processed from "FIFA GRG"'s channel).
 
 
-## II) Body joint coordinates Extraction
+# II) Body joint coordinates Extraction
   
   Once we have all our videos in a folder, we need to apply "Pose_estimation.ipynb" by modifying the code to point to the folder containing the videos and an output folder. The code will process all videos in the folder one by one and create, in the output folder, a new folder for each video containing one CSV file per frame. Each CSV file will describe the positions of the keypoints [left shoulder, right shoulder, left elbow, right elbow, left wrist, right wrist, left hip, right hip, left knee, right knee, left ankle, right ankle] in this order, along with their certainty scores (we did not take the head into account because the model does not detect the back of the head (only the nose, eyes and ears) and in any case we thought that it was not necessarily relevant for the penalty kick direction estimation).
 
@@ -122,7 +122,7 @@ https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-4
 Our final datasets are in the folder Datasets, the real dataset is composed of 123 samples but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 samples**. And the FIFA game dataset is composed of 1'385 samples  but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupledd : **5'540 samples**.
 So our final dataset is composed of **6032 samples**.
 
-## III) Model
+# III) Model
 
 We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
 
