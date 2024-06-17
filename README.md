@@ -159,7 +159,7 @@ The resulting graph showing training and validation loss includes the accuracy d
 
 ### Step 3: Inference
 
-To run inference using the trained model, use the inference.py script. This script loads the trained model and processes a given penalty video to predict the penalty direction. It prints the predicted and true labels, as well as a video of said penalty with a mark visualizing the predicted zone.
+To run inference using the trained model, use the inference.py script. This script loads the trained model and processes a single penalty to predict it's result. It prints the predicted and true labels, as well as a video of said penalty with a mark visualizing the predicted zone.
 ```
 python inference.py penalty_X
 ```
@@ -168,16 +168,16 @@ python inference.py penalty_X
 
 #### Correct Prediction
 - Penalty: 5
-- [Prediction Video - Correct](path_to_correct_prediction_video/penalty_5.mp4)
+- [Correct Prediction Video](https://github.com/vita-epfl/goalguard/assets/83677158/penalty_5.mp4)
 
 #### Incorrect Prediction
 - Penalty: 218
-- [Prediction Video - Incorrect](path_to_incorrect_prediction_video/penalty_218.mp4)
+- [Incorrect Prediction Video](https://github.com/vita-epfl/goalguard/assets/83677158/penalty_218.mp4)
 
 
 ### Data Augmentation
 
-To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize.
+To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize better.
 
 ### Limitations and Future Work
 
