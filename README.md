@@ -2,7 +2,7 @@
 
 This project aims to predict the direction of a penalty kick based on the player's run-up. We use a combination of video data from FIFA video games and real-life footage to develop and train a pose estimation model that can accurately analyze the player's movements and predict the kick's direction.
 
-<img width="434" alt="penalty" src="https://github.com/vita-epfl/goalguard/assets/146441738/74600c7d-7b34-45f3-95b3-300171d44580">
+<img width="334" alt="penalty" src="https://github.com/vita-epfl/goalguard/assets/146441738/74600c7d-7b34-45f3-95b3-300171d44580">
 
 It is an "extension" of this project : [Penalty_Kick_Analysis.pdf](https://github.com/user-attachments/files/15859660/Penalty_Kick_Analysis.pdf)
 
@@ -62,7 +62,7 @@ https://github.com/vita-epfl/goalguard/assets/146441738/fbec4334-16f6-4428-99b4-
 
 The videos found in the Videos_CUT_1 folder will be directly used for the body joints coordinate extraction, while the ones found in the Videos_RESULT_1 folder needs to be processed a bit further.
 
-#### Step 3: Run Pose Estimation on the ball
+#### Step 3: Run Detection Estimation on the ball
 
 Use the run_detection.py script to execute the detection.py and to apply pose estimation on the ball in order to determine the outcome of each penalty. This script requires the confidence threshold for detection and the folder containing the video clips :
 
