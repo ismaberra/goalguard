@@ -179,12 +179,10 @@ python inference.py penalty_X
 #### Correct Prediction
 - Penalty: 5
 
-
 https://github.com/vita-epfl/goalguard/assets/146441738/de9d479f-7859-4b16-93af-c4331b20a170
 
 #### Incorrect Prediction
 - Penalty: 218
-
 
 https://github.com/vita-epfl/goalguard/assets/146441738/2739f9f5-aaa4-440e-aba3-9e73e37abd10
 
@@ -192,7 +190,7 @@ https://github.com/vita-epfl/goalguard/assets/146441738/2739f9f5-aaa4-440e-aba3-
 
 To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize better on unseen data.
 
-### Limitations and Future Work
+### Limitations and Potential Improvements
 
 The model's performance is constrained by the limited size and imbalance of the dataset. Potential improvements could include:
 - Data augmentation 
