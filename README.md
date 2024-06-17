@@ -170,9 +170,9 @@ python training.py
 
 After training we obtained this graph, illustrating both the training and validation loss over the epochs, as well as the model's accuracy on the unseen testing data.
 
-![Training_Validation_Loss](https://github.com/vita-epfl/goalguard/assets/146441738/95d9f0cd-da85-4f97-b7ed-ed7fb57bad72)
+![Training_Validation_Loss](https://github.com/vita-epfl/goalguard/assets/146441738/6892c922-eea5-467b-8eba-958d3ab01f44)
 
-The final accuracy achieved was slighty higher than 35%, indicating a 10% improvement over a random guess. 
+The final accuracy achieved was slighty higher than 36%, indicating a 11% improvement over a random guess. 
 
 ### Step 3: Inference
 
