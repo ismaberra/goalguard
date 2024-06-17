@@ -79,7 +79,7 @@ class Postprocess(nn.Module):
         return x
 
 class ST_Trans(nn.Module):
-    def __init__(self, input_dim, num_classes, num_layers=8, nhead=16, dim_feedforward=512, dropout=0.6):
+    def __init__(self, input_dim, num_classes, num_layers=4, nhead=16, dim_feedforward=512, dropout=0.6):
         super(ST_Trans, self).__init__()
         self.num_joints = input_dim // 3
         self.side_dim = dim_feedforward

@@ -2,11 +2,11 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
-from sttrans import ST_Trans
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import resample
+import matplotlib.pyplot as plt
+import numpy as np
+from sttrans import ST_Trans
 
 LABELS = ['TR', 'TL', 'BR', 'BL']
 
@@ -37,19 +37,21 @@ def balance_dataset(data, labels):
 
     return torch.tensor(balanced_data), torch.tensor(balanced_labels)
 
-def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=25, patience=4):
+def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3, test_loader=None):
     best_loss = float('inf')
     patience_counter = 0
     training_losses = []
     validation_losses = []
+    training_accuracies = []
+    validation_accuracies = []
 
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
-        train_predicted_labels = []
+        correct_train = 0
+        total_train = 0
         for inputs, labels in train_loader:
             inputs, labels = inputs.to(model.device), labels.to(model.device)
-
             optimizer.zero_grad()
             outputs = model(inputs)
             loss = criterion(outputs, labels)
@@ -57,17 +59,20 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
             optimizer.step()
 
             running_loss += loss.item() * inputs.size(0)
-            train_predicted_labels.extend(outputs.argmax(dim=1).cpu().numpy())
+            _, predicted = torch.max(outputs, 1)
+            correct_train += (predicted == labels).sum().item()
+            total_train += labels.size(0)
 
         epoch_loss = running_loss / len(train_loader.dataset)
         training_losses.append(epoch_loss)
+        train_accuracy = correct_train / total_train
+        training_accuracies.append(train_accuracy)
 
-        val_loss, val_predicted_labels = validate_model(model, val_loader, criterion)
+        val_loss, val_accuracy = validate_model(model, val_loader, criterion)
         validation_losses.append(val_loss)
+        validation_accuracies.append(val_accuracy)
 
         print(f'Epoch {epoch + 1}/{num_epochs}, Training Loss: {epoch_loss:.4f}, Validation Loss: {val_loss:.4f}')
-        print(f'Training Predicted labels: {train_predicted_labels}')
-        print(f'Validation Predicted labels: {val_predicted_labels}')
 
         scheduler.step(val_loss)
 
@@ -79,29 +84,38 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
             patience_counter += 1
 
         if patience_counter >= patience:
-            print("Early stopping triggered.")
+            print("Early stopping")
             break
 
-        print_memory_usage()
+    if test_loader:
+        true_labels, pred_labels = evaluate_model(model, test_loader)
+        accuracy = sum(np.array(true_labels) == np.array(pred_labels)) / len(true_labels)
+        print(f'Testing Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})')
 
     plt.figure()
     plt.plot(training_losses, label='Training Loss')
     plt.plot(validation_losses, label='Validation Loss')
     plt.legend()
+    plt.text(0.95, 0.01, f'Testing Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})', 
+             verticalalignment='bottom', horizontalalignment='right', transform=plt.gca().transAxes)
     plt.savefig('Training_Validation_Loss.png')
 
 def validate_model(model, dataloader, criterion):
     model.eval()
     running_loss = 0.0
-    predicted_labels = []
+    correct_val = 0
+    total_val = 0
     with torch.no_grad():
         for inputs, labels in dataloader:
             inputs, labels = inputs.to(model.device), labels.to(model.device)
             outputs = model(inputs)
             loss = criterion(outputs, labels)
             running_loss += loss.item() * inputs.size(0)
-            predicted_labels.extend(outputs.argmax(dim=1).cpu().numpy())
-    return running_loss / len(dataloader.dataset), predicted_labels
+            _, predicted = torch.max(outputs, 1)
+            correct_val += (predicted == labels).sum().item()
+            total_val += labels.size(0)
+    val_accuracy = correct_val / total_val
+    return running_loss / len(dataloader.dataset), val_accuracy
 
 def evaluate_model(model, dataloader):
     model.eval()
@@ -115,13 +129,6 @@ def evaluate_model(model, dataloader):
             true_labels.extend(labels.cpu().numpy())
             pred_labels.extend(preds.cpu().numpy())
     return true_labels, pred_labels
-
-def print_memory_usage():
-    import os
-    import psutil
-    process = psutil.Process(os.getpid())
-    memory_in_mb = process.memory_info().rss / 1024 / 1024
-    print(f"Memory usage: {memory_in_mb:.2f} MB")
 
 def main():
     train_data_file = 'train_data.pt'
@@ -158,22 +165,23 @@ def main():
     val_dataset = TensorDataset(val_data, val_labels)
     test_dataset = TensorDataset(test_data, test_labels)
 
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+    batch_size = 52
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = ST_Trans(input_dim=36, num_classes=4).to(device)
+    model = ST_Trans(input_dim=36, num_classes=4, num_layers=4, nhead=4, dim_feedforward=768, dropout=0.38415372018572036).to(device)
     model.device = device
 
     class_weights = compute_class_weight('balanced', classes=np.unique(train_labels.numpy()), y=train_labels.numpy())
     class_weights = torch.tensor(class_weights, dtype=torch.float).to(device)
     criterion = nn.CrossEntropyLoss(weight=class_weights)
-    optimizer = optim.AdamW(model.parameters(), lr=0.001)
+    optimizer = optim.AdamW(model.parameters(), lr=0.00018305748553194186, weight_decay=0.005783491595599079)
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3)
 
-    train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=35, patience=5)
+    train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=2, test_loader=test_loader)
 
     model.load_state_dict(torch.load('best_model.pth'))
     true_labels, pred_labels = evaluate_model(model, test_loader)
@@ -181,11 +189,5 @@ def main():
     accuracy = sum(np.array(true_labels) == np.array(pred_labels)) / len(true_labels)
     print(f'Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})')
 
-    for i in range(len(true_labels)):
-        print(f"True label: {LABELS[true_labels[i]]}, Predicted label: {LABELS[pred_labels[i]]}")
-
 if __name__ == "__main__":
     main()
-
-
-
