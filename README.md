@@ -135,10 +135,14 @@ python preprocess.py
 
 ### Step 2: Train the Model
 
-Run the train.py script to train the model. This script will execute the sttrans.py script, displaying validation and training loss in the terminal and as a graph. It also compares true results with predictions for the testing data and prints the model accuracy. The trained model is saved as best_model.pth.
-```
-python training.py
-```
+The model is based on a transformer architecture, which is known for its effectiveness in handling sequential data. Our model comprises the following components:
+- **Transformer Encoder Layers**: The model consists of 4 transformer encoder layers. Each layer has 4 attention heads, which allow the model to focus on different parts of the input sequence simultaneously.
+- **Residual Blocks**: Each encoder layer includes residual connections to help gradients flow through the network, which eases the training of deeper models.
+- **Feedforward Network**: After the multi-head attention mechanism, each layer has a feedforward neural network with a dimensionality of 768.
+- **Convolutional Layers**: The input sequences are initially processed with convolutional layers to extract higher-level features before feeding them into the transformer encoder.
+- **Dropout**: A dropout rate of 0.38415372018572036 is used to prevent overfitting.
+
+The goal of this architecture is to leverage the self-attention mechanism of transformers to capture the dependencies between different frames in a penalty kick sequence. The residual blocks help maintain these learned dependencies throughout the layers.
 
 We also tuned the hyperparamaters using Optuna over 50 trials, to optimize the model. The best hyperparameters found were:
 
@@ -152,10 +156,16 @@ We also tuned the hyperparamaters using Optuna over 50 trials, to optimize the m
 | Number of heads            | 4                      |
 | Feedforward dimension      | 768                    |
 
+Run the train.py script to train the model. This script will execute the sttrans.py script, displaying validation and training loss in the terminal and as a graph. It also compares true results with predictions for the testing data and prints the model accuracy. The trained model is saved as best_model.pth.
+```
+python training.py
+```
+
+After training we obtained this graph, illustrating both the training and validation loss over the epochs, as well as the model's accuracy on the unseen testing data.
+
+![Training_Validation_Loss](https://github.com/vita-epfl/goalguard/assets/146441738/95d9f0cd-da85-4f97-b7ed-ed7fb57bad72)
 
 The resulting graph showing training and validation loss includes the accuracy during testing, which was achieved to be significantly better than random guess (25%). The final accuracy achieved was higher than 35%, indicating a 10% improvement over a random guess.
-
-![Training and Validation Loss](Training_Validation_Loss.png)
 
 ### Step 3: Inference
 
@@ -168,16 +178,15 @@ python inference.py penalty_X
 
 #### Correct Prediction
 - Penalty: 5
-- [Correct Prediction Video](https://github.com/vita-epfl/goalguard/assets/83677158/penalty_5.mp4)
+https://github.com/vita-epfl/goalguard/assets/146441738/de9d479f-7859-4b16-93af-c4331b20a170
 
 #### Incorrect Prediction
 - Penalty: 218
-- [Incorrect Prediction Video](https://github.com/vita-epfl/goalguard/assets/83677158/penalty_218.mp4)
-
+https://github.com/vita-epfl/goalguard/assets/146441738/2739f9f5-aaa4-440e-aba3-9e73e37abd10
 
 ### Data Augmentation
 
-To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize better.
+To handle the small dataset and avoid overfitting, we applied data augmentation by quadrupling the data. The augmentations included vertical flipping, horizontal translation, and both transformations combined. This resulted in significantly more data, improving the model's ability to generalize better on unseen data.
 
 ### Limitations and Future Work
 
