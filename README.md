@@ -128,7 +128,7 @@ We will now look at the model and how to use it. Regarding the datasets that we 
 
 ### Step 1: Pre-process Data
 
-To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing : train_data, val_data and test_data. Here the data has been quadrupled by first doing a vertical flipping, inversing the labels, and both at the same time, on the normalized coordinates :
+To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing: train_data, val_data and test_data. Here the data has been quadrupled by first doing a vertical flipping, inversing the labels, and both at the same time, on the normalized coordinates:
 ```
 python preprocess.py
 ```
@@ -140,4 +140,15 @@ Run the train.py script to train the model. This script will execute the sttrans
 python training.py
 ```
 
+The training process uses Optuna Tuning to optimize the hyperparameters. The best hyperparameters found were:
+
+| Hyperparameter       | Value                  |
+|----------------------|------------------------|
+| Batch size           | 52                     |
+| Dropout              | 0.38415372018572036    |
+| Learning rate        | 0.00018305748553194186 |
+| Weight decay         | 0.005783491595599079   |
+| Number of layers     | 4                      |
+| Number of heads      | 4                      |
+| Feedforward dim      | 768                    |
 
