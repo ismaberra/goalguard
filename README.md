@@ -182,9 +182,10 @@ To handle the small dataset and avoid overfitting, we applied data augmentation 
 ### Limitations and Future Work
 
 The model's performance is constrained by the limited size and imbalance of the dataset. Potential improvements could include:
-- Dimensionality reduction techniques
-- 3D pose estimation instead of 2D
+- Data augmentation 
+- 3D pose estimation instead of 2D pose
+- More accurate pose estimation of both the kicker and the ball
 - Integration of additional features like whether the player is right-footed or left-footed
 
-By addressing these limitations, we can further enhance the model's accuracy and robustness.
+By addressing these limitations, we can further enhance the model's accuracy.
 
