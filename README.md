@@ -142,9 +142,8 @@ The model is based on a transformer architecture, which is known for its effecti
 - **Convolutional Layers**: The input sequences are initially processed with convolutional layers to extract higher-level features before feeding them into the transformer encoder.
 - **Dropout**: A dropout rate of 0.38415372018572036 is used to prevent overfitting.
 
-The goal of this architecture is to leverage the self-attention mechanism of transformers to capture the dependencies between different frames in a penalty kick sequence. The residual blocks help maintain these learned dependencies throughout the layers.
-
-We also tuned the hyperparamaters using Optuna over 50 trials, to optimize the model. The best hyperparameters found were:
+The goal of this architecture is to leverage the self-attention mechanism of transformers to capture the dependencies between different frames in the penalty kick sequence. 
+Furthermore, to optimize the model, we tuned the hyperparamaters using Optuna over 50 trials. The best hyperparameters found were:
 
 | Hyperparameter             | Value                  |
 |----------------------------|------------------------|
@@ -156,7 +155,7 @@ We also tuned the hyperparamaters using Optuna over 50 trials, to optimize the m
 | Number of heads            | 4                      |
 | Feedforward dimension      | 768                    |
 
-Run the train.py script to train the model. This script will execute the sttrans.py script, displaying validation and training loss in the terminal and as a graph. It also compares true results with predictions for the testing data and prints the model accuracy. The trained model is saved as best_model.pth.
+Now, run the train.py script to train the model. This script will execute the sttrans.py script, displaying validation and training loss in the terminal and as a graph. It also compares true results with predictions for the testing data and prints the model accuracy. The trained model is saved as best_model.pth.
 ```
 python training.py
 ```
@@ -165,7 +164,7 @@ After training we obtained this graph, illustrating both the training and valida
 
 ![Training_Validation_Loss](https://github.com/vita-epfl/goalguard/assets/146441738/95d9f0cd-da85-4f97-b7ed-ed7fb57bad72)
 
-The resulting graph showing training and validation loss includes the accuracy during testing, which was achieved to be significantly better than random guess (25%). The final accuracy achieved was higher than 35%, indicating a 10% improvement over a random guess.
+The final accuracy achieved was slighty higher than 35%, indicating a 10% improvement over a random guess. 
 
 ### Step 3: Inference
 
