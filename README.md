@@ -48,6 +48,10 @@ Next, run the video_cut.py script to generate short video clips around the momen
 ```
   python videocut.py --source shoot-1.mp4
 ```
+
+https://github.com/vita-epfl/goalguard/assets/146441738/f11963e2-1ee7-428c-9084-1d9590da6800
+
+
 The videos found in the Videos_CUT_1 folder will be directly used for the body joints coordinate extraction, while the ones found in the Videos_RESULT_1 folder needs to be processed a bit further.
 
 #### Step 3: Run Pose Estimation on the ball
@@ -58,6 +62,10 @@ Use the run_detection.py script to execute the detection.py and to apply pose es
   python run_detection.py --conf 0.6 --source-folder Videos_RESULT_1
 ```
 This will output the folder Detection_RESULT_1, where inside, for each video a ball_tracking.csv file is containing the estimated position of the ball for each frame, as well as a video clip with the visualization of the estimated ball position thanks to a Kalman Filter.
+
+
+https://github.com/vita-epfl/goalguard/assets/146441738/a3c0975b-e531-4a07-bd99-bd9d265d1de3
+
 
 #### Step 4: Obtain all the results from one video
 
