@@ -172,7 +172,7 @@ After training we obtained this graph, illustrating both the training and valida
 
 ![Training_Validation_Loss](https://github.com/vita-epfl/goalguard/assets/146441738/6892c922-eea5-467b-8eba-958d3ab01f44)
 
-The final accuracy achieved was slighty higher than 36%, indicating a 11% improvement over a random guess. 
+The final accuracy achieved was slighty higher than 36%, indicating a 11% improvement over a random guess (25%).
 
 ### Step 3: Inference
 
