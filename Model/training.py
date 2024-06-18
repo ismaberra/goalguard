@@ -37,7 +37,7 @@ def balance_dataset(data, labels):
 
     return torch.tensor(balanced_data), torch.tensor(balanced_labels)
 
-def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3, test_loader=None):
+def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3):
     best_loss = float('inf')
     patience_counter = 0
     training_losses = []
@@ -87,16 +87,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
             print("Early stopping")
             break
 
-    if test_loader:
-        true_labels, pred_labels = evaluate_model(model, test_loader)
-
-    plt.figure()
-    plt.plot(training_losses, label='Training Loss')
-    plt.plot(validation_losses, label='Validation Loss')
-    plt.legend()
-    plt.text(0.95, 0.01, f'Testing Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})', 
-             verticalalignment='bottom', horizontalalignment='right', transform=plt.gca().transAxes)
-    plt.savefig('Training_Validation_Loss.png')
+    return training_losses, validation_losses
 
 def validate_model(model, dataloader, criterion):
     model.eval()
@@ -179,13 +170,21 @@ def main():
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3)
 
-    train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3, test_loader=test_loader)
+    training_losses, validation_losses = train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs=20, patience=3)
 
     model.load_state_dict(torch.load('best_model.pth'))
     true_labels, pred_labels = evaluate_model(model, test_loader)
 
     accuracy = sum(np.array(true_labels) == np.array(pred_labels)) / len(true_labels)
     print(f'Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})')
+
+    plt.figure()
+    plt.plot(training_losses, label='Training Loss')
+    plt.plot(validation_losses, label='Validation Loss')
+    plt.legend()
+    plt.text(0.95, 0.01, f'Testing Accuracy: {accuracy * 100:.2f}% ({sum(np.array(true_labels) == np.array(pred_labels))}/{len(true_labels)})', 
+             verticalalignment='bottom', horizontalalignment='right', transform=plt.gca().transAxes)
+    plt.savefig('Training_Validation_Loss.png')
 
 if __name__ == "__main__":
     main()
