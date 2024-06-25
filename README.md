@@ -22,6 +22,9 @@ The penalties collected are from the few replays available on the official YouTu
 Here is the initial dataset containing 123 real-life videos of 25 frames each :
 - https://drive.google.com/drive/folders/1RcVAFkH2hxDxp-5_n5XqajuaeXmDl0Yp?usp=sharing
 
+Here is the link for a youtube playlist containing usable videos from youtube :
+- https://www.youtube.com/playlist?list=PL4jvs7YzEU8Z-xzAvlaNYZlNHik8xDcvU&jct=rUEU9gB19zB-K5vCKbWdldf2KEn-jw
+
 ### B) Videos from FIFA
 
 
