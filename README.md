@@ -120,22 +120,25 @@ Here is an example of a zero, the row concerns the left hand that is hidden by t
 
 Finally, if the original videos were not at 30fps (e.g., 25fps), we need to use the "25_to_30_fps.ipynb" script on the output folder. This algorithm uses interpolation techniques to extend a folder of 25 CSV files to 30 CSV files. We applied this algorithm to the real-life videos.
 
-After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left).
+After completing all these steps, the final dataset will be ready for model processing. Additionally, you need to provide a CSV file with a table containing 2 columns and m+1 rows (where m represents the number of videos). The first column should contain the names of the results, and the second column should contain the labels (TR: Top Right, TC: Top Center, TL: Top Left, BR: Bottom Right, BC: Bottom Center, BL: Bottom Left). 
 
 Here is a visualization of the player's race after using the interpolation algorithm:
 
 https://github.com/vita-epfl/goalguard/assets/83677158/e19450b4-b5ca-4ec7-9876-432f6a994275
 
 
+All the python files regarding the extraction of body coordinates can be found in the Body joint coordinates Extraction folder.
+
 Our final datasets are in the folder Datasets, the real dataset is composed of 123 samples but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **492 samples**. And the FIFA game dataset is composed of 1'385 samples  but after vertical flippling and x-translation, and both at the same time, the dataset is quadrupled : **5'540 samples**.
 So our final dataset is composed of **6032 samples**.
 
 # III) Model
 
-We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder.
+We will now look at the model and how to use it. Regarding the datasets that we are using as inputs, we have two datasets : dataset_fifa and dataset_real. Both can be found in the Datasets folder. And all the python files regarding the model can be found in the Model folder.
 
 ### Step 1: Pre-process Data
 
+We decided to remove the zones BC and TC to avoid having an unbalanced data set due to the fewer samples of those zones present in the FIFA datasets, which could lead to incorrect predictions. We chose to remove them during the pre-processing step, but this can be easily modified by adding back those two zones.
 To prepare the data for model training, run the preprocess.py script. The inputs include folders containing penalty data, where each penalty folder has 30 csv files (for the 30 frames) with the 12 body joints coordinates and their certainty score. As well as the combined_results.csv file containing the label for each penalty. This will output the .pt files for training, validation, and testing: train_data, val_data and test_data. Here the data has been quadrupled by first doing a vertical flipping, inversing the labels, and both at the same time, on the normalized coordinates:
 ```
 python preprocess.py
