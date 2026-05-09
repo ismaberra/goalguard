@@ -1,3 +1,15 @@
+## My Contribution
+
+This project was developed as part of the CS-433 ML4Science program at EPFL's **VITA lab** (Visual Intelligence for Transportation Autonomous Systems).
+
+I was involved in all major components of the project:
+
+- **Dataset collection**: Manual curation and cutting of 123 real-life penalty videos from YouTube, and automated processing of 1,385 FIFA game videos using YOLOv9-based ball contact detection.
+- **Pose estimation pipeline**: Implementation and benchmarking of YOLOv7 and YOLOv8 models for body joint extraction (12 keypoints/frame), including zero-handling and 25fps to 30fps interpolation scripts.
+- **Data augmentation**: Design of the augmentation strategy (vertical flipping, horizontal translation, combinations) that quadrupled the dataset from 1,508 to 6,032 samples.
+- **Transformer model**: Architecture design (4-layer transformer encoder with convolutional input layers and residual connections), training pipeline, and hyperparameter tuning with Optuna over 50 trials — achieving 36% accuracy (11% above random baseline).
+---
+
 # Overview
 
 This project aims to predict the direction of a penalty kick based on the player's run-up. We use a combination of video data from FIFA video games and real-life footage to develop and train a pose estimation model that can accurately analyze the player's movements and predict the kick's direction.
