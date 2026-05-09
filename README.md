@@ -1,6 +1,6 @@
 ## My Contribution
 
-This project was developed as part of the CS-433 ML4Science program at EPFL's **VITA lab** (Visual Intelligence for Transportation Autonomous Systems).
+This project was developed as part of BSc thesis at EPFL's **VITA lab** (Visual Intelligence for Transportation Autonomous Systems).
 
 I was involved in all major components of the project:
 
